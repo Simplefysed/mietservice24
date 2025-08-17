@@ -38,7 +38,7 @@ export default function About() {
               Warum <span className="text-primary-600">Lück Mietservice 24</span>?
             </h2>
             <p className="text-lg text-secondary-600 mb-8 leading-relaxed">
-              Seit 4 Jahren haben wir uns als zuverlässiger Partner für Privatkunden sowie gewerbliche Auftraggeber etabliert. 
+              Seit mehreren Jahren haben wir uns als zuverlässiger Partner für Privatkunden sowie gewerbliche Auftraggeber etabliert. 
               Unser regionaler Mietservice in Fichtenwalde steht für erstklassigen Service, Beratung und Qualität der angebotenen Mietgeräte.
             </p>
             

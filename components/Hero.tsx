@@ -6,7 +6,7 @@ export default function Hero() {
     'Regelmäßig gewartete Geräte',
     'Individuelle Beratung',
     'Flexible Mietzeiten',
-    '4 Jahre Erfahrung'
+    'Mehrere Jahre Erfahrung'
   ]
 
   return (
@@ -20,7 +20,7 @@ export default function Hero() {
               <br />Ihr regionaler Mietservice-Partner
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-secondary-600 mb-6 sm:mb-8 leading-relaxed">
-              Willkommen bei Lück Mietservice 24 in Fichtenwalde. Seit 4 Jahren Ihr zuverlässiger Partner 
+              Willkommen bei Lück Mietservice 24. Seit mehreren Jahren Ihr zuverlässiger Partner 
               für Bau- und Gartengeräte. Wir stehen für erstklassigen Service, fachkundige Beratung und hochwertige Mietgeräte.
             </p>
 

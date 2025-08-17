@@ -1,0 +1,6 @@
+app/agb/page.tsx
+app/datenschutz/page.tsx
+app/impressum/page.tsx
+components/About.tsx
+components/Footer.tsx
+components/Hero.tsx
