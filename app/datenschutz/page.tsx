@@ -89,7 +89,7 @@ export default function Datenschutz() {
                 <p>Berliner Allee 63</p>
                 <p>14547 Fichtenwalde</p>
                 <p>Telefon: +49 (0) 33206 21 935</p>
-                <p>E-Mail: info@lueck-mietservice24.de</p>
+                <p>E-Mail: info@lueckmietservice24.de</p>
               </div>
               
               <p className="text-gray-600 mt-3">

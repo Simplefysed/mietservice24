@@ -38,7 +38,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-primary-400" />
-                <span className="text-secondary-300">info@lueck-mietservice24.de</span>
+                <span className="text-secondary-300">info@lueckmietservice24.de</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-primary-400" />

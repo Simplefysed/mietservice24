@@ -29,7 +29,7 @@ export default function Header() {
               </div>
               <div className="flex items-center space-x-1">
                 <Mail className="h-4 w-4" />
-                <span>info@lueck-mietservice24.de</span>
+                <span>info@lueckmietservice24.de</span>
               </div>
             </div>
             <div className="hidden sm:block">
