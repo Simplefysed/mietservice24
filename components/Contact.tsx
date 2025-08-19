@@ -76,7 +76,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-secondary-900">E-Mail</h4>
-                  <p className="text-secondary-600">info@lueck-mietservice24.de</p>
+                  <p className="text-secondary-600">info@lueckmietservice24.de</p>
                   <p className="text-sm text-secondary-500">Wir antworten innerhalb von 24h</p>
                 </div>
               </div>

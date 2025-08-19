@@ -25,7 +25,7 @@ export default function Impressum() {
               <h2 className="text-xl font-semibold text-gray-800 mb-3">Kontakt</h2>
               <div className="text-gray-600 space-y-1">
                 <p>Telefon: +49 (0) 33206 21 935</p>
-                <p>E-Mail: info@lueck-mietservice24.de</p>
+                <p>E-Mail: info@lueckmietservice24.de</p>
               </div>
             </section>
 

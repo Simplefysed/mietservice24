@@ -4,7 +4,7 @@
 
 ### Allgemeines zum Unternehmen
 
-Lück Mietservice 24 ist ein regionales Vermietunternehmen für Bau- und Gartengeräte mit Sitz in Fichtenwalde, Berliner Allee 63, 14547 Fichtenwalde. Als Ansprechpartner fungiert Monty Lück. Das Unternehmen hat sich in den letzten vier Jahren als zuverlässiger Partner für Privatkunden sowie gewerbliche Auftraggeber etabliert und steht für erstklassigen Service, Beratung und Qualität der angebotenen Mietgeräte.
+Lück Mietservice 24 ist ein regionales Vermietunternehmen für Bau- und Gartengeräte mit Sitz in Fichtenwalde, Berliner Allee 63, 14547 Fichtenwalde. Als Ansprechpartner fungiert Monty Lück. Das Unternehmen hat sich in den letzten mehreren Jahren als zuverlässiger Partner für Privatkunden sowie gewerbliche Auftraggeber etabliert und steht für erstklassigen Service, Beratung und Qualität der angebotenen Mietgeräte.
 
 Das Unternehmen bietet eine große Auswahl moderner Maschinen, die regelmäßig gewartet und technisch auf dem neuesten Stand gehalten werden. Kunden profitieren von flexiblen Mietzeiten, sodass Geräte sowohl für kurze Einsätze als auch für größere Bauvorhaben gebucht werden können.
 

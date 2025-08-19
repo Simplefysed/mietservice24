@@ -76,7 +76,7 @@ Das Projekt ist bereit für Deployment auf:
 
 **Lück Mietservice 24**
 - Telefon: +49 (0) 33206 21 935
-- E-Mail: info@lueck-mietservice24.de
+- E-Mail: info@lueckmietservice24.de
 - Öffnungszeiten: Mo-Fr: 07:00-18:00 | Sa: 08:00-16:00
 
 ## 📄 Lizenz
