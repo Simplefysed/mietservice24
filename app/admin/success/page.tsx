@@ -52,8 +52,8 @@ function SuccessPage() {
               <p>Diese Seite kann geschlossen werden.</p>
               <p className="mt-2">
                 Bei Fragen wenden Sie sich an: 
-                <a href="mailto:info@lueck-mietservice24.de" className="text-primary-600 hover:text-primary-700 ml-1">
-                  info@lueck-mietservice24.de
+                <a href="mailto:vin@simplefysed.com" className="text-primary-600 hover:text-primary-700 ml-1">
+                  vin@simplefysed.com
                 </a>
               </p>
             </div>

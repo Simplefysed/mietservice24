@@ -40,24 +40,18 @@ function ErrorPage() {
                 <span className="text-sm font-medium text-amber-800">Was können Sie tun?</span>
               </div>
               <ul className="text-sm text-amber-700 space-y-1">
-                <li>• Überprüfen Sie, ob die Buchung bereits bearbeitet wurde</li>
-                <li>• Kontaktieren Sie den Kunden direkt per Telefon</li>
-                <li>• Versuchen Sie es später erneut</li>
+                <li>• Überprüfe, ob die Buchung bereits bearbeitet wurde</li>
+                <li>• Kontaktiere den Kunden direkt per Telefon</li>
+                <li>• Überprüfe die Supabase Datenbank</li>
               </ul>
             </div>
 
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Kontakt für Unterstützung</h3>
-              <div className="flex items-center justify-center space-x-6">
-                <div className="flex items-center space-x-2">
-                  <Phone className="h-5 w-5 text-primary-600" />
-                  <span className="text-sm font-medium text-gray-700">+49 (0) 33206 21 935</span>
-                </div>
-              </div>
               <p className="text-sm text-gray-500 mt-4">
                 E-Mail: 
-                <a href="mailto:info@lueck-mietservice24.de" className="text-primary-600 hover:text-primary-700 ml-1">
-                  info@lueck-mietservice24.de
+                <a href="mailto:vin@simplefysed.com" className="text-primary-600 hover:text-primary-700 ml-1">
+                  vin@simplefysed.com
                 </a>
               </p>
             </div>
