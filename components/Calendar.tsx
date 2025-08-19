@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react'
+import { supabase, Booking } from '@/lib/supabase'
 
 interface CalendarProps {
+  serviceId: string
   onDateRangeSelect: (startDate: Date | null, endDate: Date | null) => void
-  bookedDates: { start: Date; end: Date }[]
   minDate?: Date
   maxDate?: Date
 }
@@ -22,11 +23,13 @@ interface CalendarDate {
   isPartiallyBooked: boolean
 }
 
-export default function Calendar({ onDateRangeSelect, bookedDates, minDate, maxDate }: CalendarProps) {
+export default function Calendar({ serviceId, onDateRangeSelect, minDate, maxDate }: CalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null)
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null)
   const [isSelectingRange, setIsSelectingRange] = useState(false)
+  const [bookings, setBookings] = useState<Booking[]>([])
+  const [loading, setLoading] = useState(true)
 
   const today = new Date()
   const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1)
@@ -43,10 +46,41 @@ export default function Calendar({ onDateRangeSelect, bookedDates, minDate, maxD
 
   const dayNames = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
 
+  // Load bookings from Supabase
+  const loadBookings = async () => {
+    if (!serviceId) return
+
+    setLoading(true)
+    try {
+      const startDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1)
+      const endDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 2, 0)
+
+      const response = await fetch(
+        `/api/bookings?service_id=${serviceId}&start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate.toISOString().split('T')[0]}`
+      )
+      
+      if (response.ok) {
+        const data = await response.json()
+        setBookings(data.bookings || [])
+      } else {
+        console.error('Failed to load bookings')
+      }
+    } catch (error) {
+      console.error('Error loading bookings:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Load bookings when component mounts or month changes
+  useEffect(() => {
+    loadBookings()
+  }, [serviceId, currentMonth])
+
   const isDateBooked = (date: Date): boolean => {
-    return bookedDates?.some(booking => {
-      const bookingStart = new Date(booking.start)
-      const bookingEnd = new Date(booking.end)
+    return bookings?.some(booking => {
+      const bookingStart = new Date(booking.start_date + 'T' + booking.start_time)
+      const bookingEnd = new Date(booking.end_date + 'T' + booking.end_time)
       bookingStart.setHours(0, 0, 0, 0)
       bookingEnd.setHours(23, 59, 59, 999)
       const checkDate = new Date(date)
@@ -172,7 +206,14 @@ export default function Calendar({ onDateRangeSelect, bookedDates, minDate, maxD
   }
 
   return (
-    <div className="bg-white border border-secondary-200 rounded-xl p-6 shadow-lg">
+    <div className="relative bg-white border border-secondary-200 rounded-xl p-6 shadow-lg">
+      {/* Loading Indicator */}
+      {loading && (
+        <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center rounded-xl z-10">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+        </div>
+      )}
+      
       {/* Calendar Header */}
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold text-secondary-900 flex items-center">
