@@ -55,8 +55,16 @@ export default function Calendar({ serviceId, onDateRangeSelect, minDate, maxDat
       const startDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1)
       const endDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 2, 0)
 
+      // Convert to German date format (DD-MM-YYYY)
+      const formatDateForAPI = (date: Date) => {
+        const day = date.getDate().toString().padStart(2, '0')
+        const month = (date.getMonth() + 1).toString().padStart(2, '0')
+        const year = date.getFullYear()
+        return `${day}-${month}-${year}`
+      }
+
       const response = await fetch(
-        `/api/bookings?service_id=${serviceId}&start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate.toISOString().split('T')[0]}`
+        `/api/bookings?service_id=${serviceId}&start_date=${formatDateForAPI(startDate)}&end_date=${formatDateForAPI(endDate)}`
       )
       
       if (response.ok) {
@@ -79,12 +87,18 @@ export default function Calendar({ serviceId, onDateRangeSelect, minDate, maxDat
 
   const isDateBooked = (date: Date): boolean => {
     return bookings?.some(booking => {
-      const bookingStart = new Date(booking.start_date + 'T' + booking.start_time)
-      const bookingEnd = new Date(booking.end_date + 'T' + booking.end_time)
+      // Convert German date format (DD-MM-YYYY) to Date object
+      const [day, month, year] = booking.start_date.split('-')
+      const bookingStart = new Date(parseInt(year), parseInt(month) - 1, parseInt(day))
       bookingStart.setHours(0, 0, 0, 0)
+      
+      const [endDay, endMonth, endYear] = booking.end_date.split('-')
+      const bookingEnd = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay))
       bookingEnd.setHours(23, 59, 59, 999)
+      
       const checkDate = new Date(date)
       checkDate.setHours(12, 0, 0, 0)
+      
       return checkDate >= bookingStart && checkDate <= bookingEnd
     })
   }

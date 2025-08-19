@@ -2,23 +2,57 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabase, supabaseAdmin, CreateBookingData } from '@/lib/supabase'
 import { v4 as uuidv4 } from 'uuid'
 
+// Convert German date format (DD-MM-YYYY) to ISO format (YYYY-MM-DD)
+function convertGermanDateToISO(germanDate: string): string {
+  const [day, month, year] = germanDate.split('-')
+  return `${year}-${month}-${day}`
+}
+
+// Convert ISO date format (YYYY-MM-DD) to German format (DD-MM-YYYY)
+function convertISOToGermanDate(isoDate: string): string {
+  const [year, month, day] = isoDate.split('-')
+  return `${day}-${month}-${year}`
+}
+
 // GET: Fetch bookings for a service and date range
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const serviceId = searchParams.get('service_id')
+    const startDate = searchParams.get('start_date')
+    const endDate = searchParams.get('end_date')
     
     if (!serviceId) {
       return NextResponse.json({ error: 'Service ID is required' }, { status: 400 })
     }
 
+    // Convert German date format to ISO for Supabase query
+    let isoStartDate = null
+    let isoEndDate = null
+    
+    if (startDate) {
+      isoStartDate = convertGermanDateToISO(startDate)
+    }
+    if (endDate) {
+      isoEndDate = convertGermanDateToISO(endDate)
+    }
+
     // Try to fetch bookings from Supabase
-    const { data, error } = await supabase
+    let query = supabase
       .from('bookings')
       .select('*')
       .eq('service_id', serviceId)
       .eq('status', 'confirmed')
       .limit(50)
+
+    if (isoStartDate) {
+      query = query.gte('start_date', isoStartDate)
+    }
+    if (isoEndDate) {
+      query = query.lte('end_date', isoEndDate)
+    }
+
+    const { data, error } = await query
 
     if (error) {
       console.error('Supabase GET error:', error)
@@ -38,8 +72,15 @@ export async function GET(request: NextRequest) {
       }, { status: 500 })
     }
 
+    // Convert dates back to German format for frontend
+    const bookingsWithGermanDates = data?.map(booking => ({
+      ...booking,
+      start_date: convertISOToGermanDate(booking.start_date),
+      end_date: convertISOToGermanDate(booking.end_date)
+    })) || []
+
     return NextResponse.json({ 
-      bookings: data || [],
+      bookings: bookingsWithGermanDates,
       tableExists: true
     })
 
@@ -65,16 +106,23 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
     
+    // Convert German date format to ISO format for Supabase
+    const bookingDataForSupabase = {
+      ...bookingData,
+      start_date: convertGermanDateToISO(bookingData.start_date),
+      end_date: convertGermanDateToISO(bookingData.end_date)
+    }
+    
     // Generate unique booking token for admin actions
     const bookingToken = uuidv4()
 
-    console.log('Creating booking with data:', { ...bookingData, booking_token: bookingToken })
+    console.log('Creating booking with data:', { ...bookingDataForSupabase, booking_token: bookingToken })
 
     // Insert booking into Supabase
     const { data, error } = await supabaseAdmin
       .from('bookings')
       .insert([{
-        ...bookingData,
+        ...bookingDataForSupabase,
         booking_token: bookingToken,
         status: 'pending'
       }])

@@ -51,13 +51,21 @@ export default function BookingForm({
     setError('')
 
     try {
+      // Convert to German date format (DD-MM-YYYY)
+      const formatDateForAPI = (date: Date) => {
+        const day = date.getDate().toString().padStart(2, '0')
+        const month = (date.getMonth() + 1).toString().padStart(2, '0')
+        const year = date.getFullYear()
+        return `${day}-${month}-${year}`
+      }
+
       const bookingData: CreateBookingData = {
         service_id: serviceId,
         customer_name: formData.customer_name,
         customer_email: formData.customer_email,
         customer_phone: formData.customer_phone,
-        start_date: selectedStartDate.toISOString().split('T')[0],
-        end_date: selectedEndDate.toISOString().split('T')[0],
+        start_date: formatDateForAPI(selectedStartDate),
+        end_date: formatDateForAPI(selectedEndDate),
         start_time: formData.start_time,
         end_time: formData.end_time
       }

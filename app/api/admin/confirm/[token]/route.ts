@@ -32,6 +32,20 @@ export async function GET(
     // Send confirmation email via Make.com webhook
     const webhookUrl = 'https://hook.eu2.make.com/6s1hua9hf319q2wim3bforg9mystuyw2'
     
+    // Build base URL for links (works on Vercel and locally)
+    const protocol = request.headers.get('x-forwarded-proto') || 'http'
+    const host = request.headers.get('host') || 'localhost:3001'
+    const baseUrl = `${protocol}://${host}`
+    
+    // Include all booking variables and admin links in the payload
+    const bookingPayload = {
+      ...data,
+      service_name: getServiceName(data.service_id),
+      admin_token: data.booking_token,
+      confirm_url: `${baseUrl}/api/admin/confirm/${data.booking_token}`,
+      cancel_url: `${baseUrl}/api/admin/cancel/${data.booking_token}`
+    }
+    
     try {
       await fetch(webhookUrl, {
         method: 'POST',
@@ -40,19 +54,7 @@ export async function GET(
         },
         body: JSON.stringify({
           type: 'booking_confirmed',
-          booking: {
-            id: data.id,
-            service_id: data.service_id,
-            service_name: getServiceName(data.service_id),
-            customer_name: data.customer_name,
-            customer_email: data.customer_email,
-            customer_phone: data.customer_phone,
-            start_date: data.start_date,
-            end_date: data.end_date,
-            start_time: data.start_time,
-            end_time: data.end_time,
-            confirmed_at: data.updated_at
-          }
+          booking: bookingPayload
         })
       })
     } catch (webhookError) {
