@@ -34,7 +34,6 @@ export default function Impressum() {
               <div className="text-gray-600 space-y-1">
                 <p>Eintragung im Handelsregister.</p>
                 <p>Registergericht: Amtsgericht Potsdam</p>
-                <p>Registernummer: HRA 12345</p>
               </div>
             </section>
 
