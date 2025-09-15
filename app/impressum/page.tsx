@@ -14,9 +14,9 @@ export default function Impressum() {
               <h2 className="text-xl font-semibold text-gray-800 mb-3">Angaben gemäß § 5 TMG</h2>
               <div className="text-gray-600 space-y-1">
                 <p>Lück Mietservice 24</p>
-                <p>Inhaber: Monty Lück</p>
-                <p>Berliner Allee 63</p>
-                <p>14547 Fichtenwalde</p>
+                <p>Inhaber: Bernd Lück</p>
+                <p>Semmelweisstr 6</p>
+                <p>14712 Rathenow</p>
                 <p>Deutschland</p>
               </div>
             </section>
@@ -24,6 +24,18 @@ export default function Impressum() {
             <section>
               <h2 className="text-xl font-semibold text-gray-800 mb-3">Kontakt</h2>
               <div className="text-gray-600 space-y-1">
+                <p>Telefon: 01522-1535016</p>
+                <p>E-Mail: info@berndlueck.de</p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold text-gray-800 mb-3">Niederlassung</h2>
+              <div className="text-gray-600 space-y-1">
+                <p>Lück Mietservice 24</p>
+                <p>Leitung: Monty Lück</p>
+                <p>Berliner Allee 63</p>
+                <p>14547 Beelitz/OT. Fichtenwalde</p>
                 <p>Telefon: +49 (0) 33206 21 935</p>
                 <p>E-Mail: info@lueckmietservice24.de</p>
               </div>
